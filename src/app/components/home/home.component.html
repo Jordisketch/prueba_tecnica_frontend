@@ -1,0 +1,5 @@
+<div class="w-full h-full flex flex-col ">
+    <app-filtro-tareas [prioridades]="prioridades" [colaboradores]="colaboradores" [estados]="estados"></app-filtro-tareas>
+    <app-tareas [tareas]="tareas"></app-tareas>
+    <app-form-tareas [prioridades]="prioridades" [colaboradores]="colaboradores" [estados]="estados" (refresh)="getEvent($event)"></app-form-tareas>
+</div>

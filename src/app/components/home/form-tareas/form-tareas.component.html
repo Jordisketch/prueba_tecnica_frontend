@@ -1,0 +1,71 @@
+<div class="flex flex-col w-4/6 my-0 mx-auto mat-elevation-z8 mt-5">
+    <mat-toolbar color="warn" class="flex flex-row justify-center ">Manejo de tareas</mat-toolbar>
+    <div [formGroup]="form" class="flex flex-wrap justify-around">
+
+
+        <mat-form-field appearence="outline" class="w-full">
+            <mat-label>Descripcion</mat-label>
+            <input type="text" matInput formControlName="descripcion">
+            <mat-error *ngIf="form.get('descripcion')?.hasError('required')">Este campo es requerido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearence="fill" class="w-full md:w-6/12">
+            <mat-label>Fecha Inicio</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="fechainicio">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="form.get('fechainicio')?.hasError('required')">Este campo es requerido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearence="outline" class="w-full md:w-6/12">
+            <mat-label>Fecha Fin</mat-label>
+            <input matInput [matDatepicker]="picker2" formControlName="fechafin">
+            <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+            <mat-error *ngIf="form.get('fechafin')?.hasError('required')">Este campo es requerido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearence="fill"  class="w-full md:w-6/12">
+            <mat-label>Estado</mat-label>
+                <mat-select formControlName="estado" (selectionChange)="manageEstado()">
+                    <mat-option *ngFor="let estado of estados" [value]="estado.id">
+                    {{estado.nombre}}
+                    </mat-option>
+                </mat-select>
+            <mat-error *ngIf="form.get('estado')?.hasError('required')">Este campo es requerido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearence="fill"   class="w-full md:w-6/12">
+            <mat-label>Prioridad</mat-label>
+            <mat-select formControlName="prioridad">
+                <mat-option *ngFor="let prioridad of prioridades" [value]="prioridad.id">
+                {{prioridad.nombre}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('prioridad')?.hasError('required')">Este campo es requerido</mat-error>
+        </mat-form-field>
+        
+        <mat-form-field appearence="fill"   class="w-full">
+            <mat-label>Colaborador</mat-label>
+            <mat-select formControlName="colaborador">
+                <mat-option *ngFor="let colaborador of colaboradores" [value]="colaborador.id">
+                {{colaborador.nombre}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('colaborador')?.hasError('required')">Este campo es requerido</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field appearence="fill"   class="w-full">
+            <mat-label>Notas</mat-label>
+            <textarea matInput formControlName="notas"></textarea>
+            <mat-error *ngIf="form.get('notas')?.hasError('required')">Este campo es requerido</mat-error>
+        </mat-form-field>
+
+    </div>
+    <div class="my-5 flex flex-row justify-center items-center">
+        <button mat-raised-button color="accent"  [disabled]="!form.valid" (click)=save()>
+            {{form.get('id')?.value > 0 ? 'Editar' : 'Guardar'}}
+        </button>
+    </div>
+</div>

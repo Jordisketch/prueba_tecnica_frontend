@@ -1,0 +1,61 @@
+<div class="flex flex-col w-4/6 my-0 mx-auto mat-elevation-z8 mt-5">
+    <mat-toolbar color="accent" class="flex flex-row justify-center">Opciones de busqueda</mat-toolbar>
+    <div class="f;ex flex-col justify-around">
+        <mat-slide-toggle [(ngModel)]="todos" class="my-5 mx-5" (change)="onToggle()" >Mostrar todas las tareas</mat-slide-toggle>
+        <div *ngIf="!todos">
+            <div [formGroup]="form" class="flex flex-wrap justify-around">
+
+                <mat-form-field appearence="fill" class="w-full md:w-6/12">
+                    <mat-label>Fecha Inicio</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="fechainicio">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+        
+                <mat-form-field appearence="outline" class="w-full md:w-6/12">
+                    <mat-label>Fecha Fin</mat-label>
+                    <input matInput [matDatepicker]="picker2" formControlName="fechafin">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+        
+                <mat-form-field appearence="fill"  class="w-full md:w-6/12">
+                    <mat-label>Estado</mat-label>
+                        <mat-select formControlName="estado">
+                            <mat-option *ngFor="let estado of estados" [value]="estado.id">
+                            {{estado.nombre}}
+                            </mat-option>
+                        </mat-select>
+                </mat-form-field>
+        
+                <mat-form-field appearence="fill"   class="w-full md:w-6/12">
+                    <mat-label>Prioridad</mat-label>
+                    <mat-select formControlName="prioridad">
+                        <mat-option *ngFor="let prioridad of prioridades" [value]="prioridad.id">
+                        {{prioridad.nombre}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
+                <mat-form-field appearence="fill"   class="w-full">
+                    <mat-label>Colaborador</mat-label>
+                    <mat-select formControlName="colaborador">
+                        <mat-option *ngFor="let colaborador of colaboradores" [value]="colaborador.id">
+                        {{colaborador.nombre}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="form.get('colaborador')?.hasError('required')">Este campo es requerido</mat-error>
+                </mat-form-field>
+    
+            </div>
+            <div class="flex flex-row items-center justify-center my-5 gap-1">
+                <button mat-raised-button (click)="buscar()" color="primary" matTooltip="Click para aplicar filtro">
+                    Buscar
+                </button>
+                <button mat-raised-button (click)="limpiarFiltro()" color="warn">
+                    Limpiar filtro
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
