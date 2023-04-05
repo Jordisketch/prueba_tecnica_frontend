@@ -2,7 +2,7 @@
 
     -- El proyecto esta realizado con Angular 15, por lo que, utilice node 18 para el manejo de este.
     -- Este proyecto cuenta con JWT para la autenticacion y proteccion de los endpoints.
-    -- Tambien cuenta con un apartado para crear usuarios, por lo que se pueden tener multiples usuarios registrados.
+    -- Tambien cuenta con un apartado para crear usuarios, por lo que se pueden tener multiples usuarios registrados. Noi implemente la visualizacion para este  apartado porque no lo encontre relevante, pero en caso de necesitarse, lo implemento.
     -- Cuenta con AuthGuard para acceder a los componentes aparte de login necesitando autorizacion.
     -- El JWT se guarda en el localStorage por medio del key 'token'.
 
