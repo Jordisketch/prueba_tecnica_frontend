@@ -13,7 +13,7 @@ export interface Tarea_Interface{
     fechainicio: any, 
     fechafin: any,
     notas: string,
-    colaborador: Campos_Interface,
+    colaborador?: Campos_Interface,
     estado: Campos_Interface,
     prioridad: Campos_Interface
 }

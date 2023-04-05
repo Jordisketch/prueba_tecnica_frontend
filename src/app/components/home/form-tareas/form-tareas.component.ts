@@ -39,7 +39,7 @@ export class FormTareasComponent implements OnChanges{
           fechainicio: new Date(res.fechainicio),
           fechafin: new Date(res.fechafin),
           notas: res.notas,
-          colaborador: res.colaborador.id != null && res.colaborador != null ? res.colaborador.id : '',
+          colaborador:  res.colaborador && res.colaborador.id != null && res.colaborador != null ? res.colaborador.id : '',
           estado: res.estado.id,
           prioridad: res.prioridad.id
         });
@@ -51,6 +51,9 @@ export class FormTareasComponent implements OnChanges{
 
   manageEstado(): void{
     //si es el estado es distinto de pendiente se debe requerir un colaborador
+    console.log(this.getFormValue<number>('estado'));
+    console.log(this.getFormValue<string>('colaborador'));
+
     if(this.getFormValue<number>('estado') > 1){
       this.form.controls['colaborador'].setValidators([Validators.required]);
       this.form.controls['colaborador'].updateValueAndValidity();
@@ -80,12 +83,8 @@ export class FormTareasComponent implements OnChanges{
   }
 
   getInfo(): Tarea_Interface{
-    return {
-      id: 0,
-      colaborador: {
-        id: this.getFormValue<number>('colaborador'),
-        nombre: this.findColaborador(this.getFormValue<number>('colaborador')) != undefined ? this.findColaborador(this.getFormValue<number>('colaborador'))! : ''
-      } ,
+    let info: Tarea_Interface = {
+      id:  this.getFormValue<number>('id'),
       prioridad: {
         id:this.getFormValue<number>('prioridad'),
         nombre: this.findPrioridad(this.getFormValue<number>('prioridad')) != undefined ? this.findPrioridad(this.getFormValue<number>('prioridad'))! : ''
@@ -99,6 +98,15 @@ export class FormTareasComponent implements OnChanges{
       fechafin: new Date(this.getFormValue('fechafin')),
       fechainicio: new Date(this.getFormValue('fechainicio')),
     };
+
+    if(this.getFormValue<string>('colaborador') != '' && this.getFormValue<number>('colaborador') > 0){
+      info.colaborador = {
+          id: this.getFormValue<number>('colaborador'),
+          nombre: this.findColaborador(this.getFormValue<number>('colaborador')) != undefined ? this.findColaborador(this.getFormValue<number>('colaborador'))! : ''
+        } ;
+    };
+
+    return  info;
   }
 
 
@@ -113,5 +121,17 @@ export class FormTareasComponent implements OnChanges{
   findPrioridad(prioridadId: number){
     return this.prioridades.find((res: Campos_Interface) => res.id == prioridadId)?.nombre;
   }
-  
+
+  limpiar():void {
+    this.form.setValue({
+      id: 0,
+      descripcion: '',
+      fechainicio: '',
+      fechafin: '',
+      notas: '',
+      colaborador: '',
+      estado: '',
+      prioridad: ''
+    });
+  }
 }

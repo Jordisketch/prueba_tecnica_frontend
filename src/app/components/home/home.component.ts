@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit{
           this.tareas = res;
       },
       error: (err: any) => {
-        alert('Error al cargar las tareas');
+        this.toastrService.error('Error al cargar las tareas');
       }
     });
   }
@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit{
           this.tareas = res;
       },
       error: (err: any) => {
-        alert('Error al cargar las tareas');
+        this.toastrService.error('Error al cargar las tareas');
       }
     });
   }
@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit{
           this.colaboradores = res;
       },
       error: (err: any) => {
-        alert('Error al cargar las tareas');
+        this.toastrService.error('Error al cargar los colaboradores');
       }
     });
   }
@@ -77,7 +77,7 @@ export class HomeComponent implements OnInit{
           this.estados = res;
       },
       error: (err: any) => {
-        alert('Error al cargar las tareas');
+        this.toastrService.error('Error al cargar los estados');
       }
     });
   }
@@ -87,13 +87,12 @@ export class HomeComponent implements OnInit{
           this.prioridades = res;
       },
       error: (err: any) => {
-        alert('Error al cargar las tareas');
+        this.toastrService.error('Error al cargar las prioridades');
       }
     });
   }
 
   getEvent(event: Event){
-    console.log(event);
     this.getTareas();
   }
 
