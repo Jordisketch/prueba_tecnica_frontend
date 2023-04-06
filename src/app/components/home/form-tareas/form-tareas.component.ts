@@ -73,7 +73,8 @@ export class FormTareasComponent implements OnChanges{
   save(): void{
     this.service.saveTarea(this.getInfo()).subscribe({
       next: (res: any) => {
-        this.toastrService.success('Datos guardados correctamente');
+        this.toastrService.success('Datos guardados correctamente.');
+        this.limpiar();
         this.refresh.emit(true);
       },
       error: (err) => {
