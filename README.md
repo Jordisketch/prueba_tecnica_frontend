@@ -34,8 +34,8 @@
     ** Estructura JSON.
 
         -- Para la devolucion de datos, lo maneje por medio de ResponseEntity<>, que envia un body y un status code de la peticion. Para los GET, devuelve una estructura JSON en forma de lista   con el modelo que se esta solicitando.
-           Para los POST, se devuelve en formato JSON, el modelo que se esta guardando. 
-           Para los DELETE, se devuelve un bean, que contiene el mensaje y si fue exitoso.
+           Para los POST, se envia el status code de la peticion y se muestra un mensaje correspondiente. 
+           Para los DELETE, se envia el status code de la peticion y se muestra un mensaje correspondiente.
 
         
 
